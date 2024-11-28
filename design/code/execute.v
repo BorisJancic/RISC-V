@@ -10,31 +10,16 @@ module execute(
 	input reset,
 	input valid,
 	input[31:0] pc,
-	input[31:0] instruction,
+	input[6:0] opcode,
+	input[2:0] funct3,
+	input[6:0] funct7,
+	input[31:0] imm,
 	input[31:0] reg_1,
 	input[31:0] reg_2,
-	input[31:0] imm,
 
     output reg[31:0] alu_res,
-    output reg br_taken,
-	output reg jp_taken
+    output reg br_taken
 );
-	wire[6:0] funct7;
-	wire[4:0] shamt;
-	wire[4:0] rs2;
-	wire[4:0] rs1;
-	wire[2:0] funct3;
-	wire[4:0] rd;
-	wire[6:0] opcode;
-	assign funct7[6:0] = instruction[31:25];
-	assign shamt[4:0]  = instruction[24:20];
-	assign rs2[4:0]    = instruction[24:20];
-	assign rs1[4:0]    = instruction[19:15];
-	assign funct3[2:0] = instruction[14:12];
-	assign rd[4:0]     = instruction[11:7];
-	assign opcode[6:0] = instruction[6:0];
-
-
 	always @(*) begin
         case (opcode)
 			`R_I_TYPE: begin // 7'b0010011
@@ -156,48 +141,38 @@ module execute(
 	always @(*) begin
 		if (reset || !valid) begin
 			br_taken = 0;
-			jp_taken = 0;
 		end else begin
 			case (opcode)
 				`B_TYPE: begin
 					case(funct3)
 						3'b000: begin //BEQ
 							br_taken = (reg_1 == reg_2) ? 1:0;
-							jp_taken = 0;
 						end
 					    3'b001: begin //BNE
 				            br_taken = (reg_1 != reg_2) ? 1:0;
-							jp_taken = 0;
 					    end
 						3'b100: begin //BLT
 							br_taken = ($signed(reg_1) < $signed(reg_2)) ? 1:0;
-							jp_taken = 0;
 						end
 			            3'b101: begin //BGE
 							br_taken = ($signed(reg_1) >= $signed(reg_2)) ? 1:0;
-							jp_taken = 0;
 						end
 						3'b110: begin //BLTU
 							br_taken = ($unsigned(reg_1) < $unsigned(reg_2)) ? 1:0;
-							jp_taken = 0;
 						end
 					    3'b111: begin //BGEU
 					        br_taken = ($unsigned(reg_1) >= $unsigned(reg_2)) ? 1:0;
-							jp_taken = 0;
 					    end
 						default: begin
 							br_taken = 0;
-							jp_taken = 0;
 						end
 					endcase
 				end
 				7'b1100111, 7'b1101111: begin
-					br_taken = 0;
-					jp_taken = 1;
+					br_taken = 1;
 				end
 				default: begin
 					br_taken = 0;
-					jp_taken = 0;
 				end
 			endcase
 		end

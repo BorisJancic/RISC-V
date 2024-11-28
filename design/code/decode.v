@@ -9,7 +9,13 @@
 
 module decode(
 	input[31:0] instruction,
-
+	
+	output[6:0] opcode_out,
+	output[2:0] funct3_out,
+	output[6:0] funct7_out,
+	output[4:0] rs1_out,
+	output[4:0] rs2_out,
+	output[4:0] rd_out,
 	output[31:0] imm
 );
 	wire[6:0] funct7;
@@ -27,6 +33,25 @@ module decode(
 	assign rd[4:0]     = instruction[11:7];
 	assign opcode[6:0] = instruction[6:0];
 
+	assign opcode_out[6:0] = opcode[6:0];
+	assign funct3_out[2:0] = (
+		opcode[6:0] != 7'b0110111 && opcode[6:0] != 7'b0010111 && opcode[6:0] != 7'b1101111
+	) ? funct3[2:0] : 3'd0;
+	assign funct7_out[6:0] = (
+		opcode[6:0] == 7'b0010011 || opcode[6:0] == 7'b0110011
+	) ? funct7[6:0] : 7'd0;
+	assign rs1_out[4:0] = (
+		opcode[6:0] != 7'b0110111 && opcode[6:0] != 7'b0010111 && opcode[6:0] != 7'b1101111
+	) ? rs1[4:0] : 5'd0;
+	assign rs2_out[4:0] = (
+		opcode[6:0] == 7'b0110011 || opcode[6:0] == 7'b0100011 || opcode[6:0] == 7'b1100011
+	) ? rs2[4:0] : 5'd0;
+	assign rd_out[4:0] = (
+		opcode[6:0] != 7'b0100011 && opcode[6:0] != 7'b1100011
+	) ? rd[4:0] : 5'd0;
+
+
+	// immediate value
     always @(*) begin
         case (opcode)
 			`R_I_TYPE: begin

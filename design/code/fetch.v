@@ -2,8 +2,7 @@
 module fetch(
 	input clock,
 	input reset,
-	input br_taken,
-	input jp_taken,
+	input branch,
 	input stall,
 	input[31:0] alu_res,
 
@@ -28,7 +27,7 @@ module fetch(
 	always @(posedge clock) begin
 		if (reset) begin
 			pc <= 32'h01000000;
-		end else if (br_taken || jp_taken) begin
+		end else if (branch) begin
 			pc <= alu_res;
 		end else if (stall) begin
 			pc <= pc;
@@ -39,6 +38,7 @@ module fetch(
 
 	imemory imem_0(
 		.clock(clock),
+		.enable(!stall),
 		.read_write(read_write_imem),
 		.address(pc),
 		.data_in(imem_data_in),
