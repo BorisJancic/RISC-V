@@ -6,14 +6,11 @@ module cpu(
 	reg read_write_imem;
 	
 	// Signal
-	wire[4:0] ID_shamt;
-
-	wire ME_read_write;
-    wire[1:0] ME_size_encoded;
+	(* dont_touch = "true" *) wire[4:0] ID_shamt;
 
 	// Variable name order (have wires defined at the top of the file)
 	// Control signals
-	wire branch;
+	(* dont_touch = "true" *) wire branch;
 	wire stall;
 
 	/*wire stall_1;
@@ -28,27 +25,27 @@ module cpu(
 	reg [31:0] data_in;
  
 	wire IF_valid;
-	wire[31:0] IF_pc;
-	wire[31:0] IF_instruction;
+	(* dont_touch = "true" *) wire[31:0] IF_pc;
+	(* dont_touch = "true" *) wire[31:0] IF_instruction;
 
 	// ID
 	wire ID_valid;
-	wire[31:0] ID_pc;
+	(* dont_touch = "true" *) wire[31:0] ID_pc;
 	wire[31:0] ID_instruction;
 
-	wire[6:0] ID_opcode;
-	wire[2:0] ID_funct3;
-	wire[6:0] ID_funct7;
-	wire[4:0] ID_rs1;
-	wire[4:0] ID_rs2;
-	wire[4:0] ID_rd;
-	wire[31:0] ID_imm;
-	wire[31:0] ID_reg_1;
-    wire[31:0] ID_reg_2;
+	(* dont_touch = "true" *) wire[6:0] ID_opcode;
+	(* dont_touch = "true" *) wire[2:0] ID_funct3;
+	(* dont_touch = "true" *) wire[6:0] ID_funct7;
+	(* dont_touch = "true" *) wire[4:0] ID_rs1;
+	(* dont_touch = "true" *) wire[4:0] ID_rs2;
+	(* dont_touch = "true" *) wire[4:0] ID_rd;
+	(* dont_touch = "true" *) wire[31:0] ID_imm;
+	(* dont_touch = "true" *) wire[31:0] ID_reg_1;
+    (* dont_touch = "true" *) wire[31:0] ID_reg_2;
 
 	// EX
     wire EX_valid;
-    wire[31:0] EX_pc;
+    (* dont_touch = "true" *) wire[31:0] EX_pc;
 	wire[6:0] EX_opcode;
 	wire[2:0] EX_funct3;
 	wire[6:0] EX_funct7;
@@ -61,32 +58,33 @@ module cpu(
     wire[31:0] EX_reg_2;
 	wire[31:0] EX_reg_1_selected;
 	wire[31:0] EX_reg_2_selected;
-	wire[31:0] EX_alu_res;
+	(* dont_touch = "true" *) wire[31:0] EX_alu_res;
 	
 	// ME
 	wire ME_valid;
-    wire[31:0] ME_pc;
+    (* dont_touch = "true" *) wire[31:0] ME_pc;
 	wire[6:0] ME_opcode;
 	wire[2:0] ME_funct3;
 	wire[4:0] ME_rs2;
 	wire[4:0] ME_rd;
-    wire[31:0] ME_alu_res;
+    (* dont_touch = "true" *) wire[31:0] ME_alu_res;
 	wire[31:0] ME_reg_2;
-    wire[31:0] ME_reg_2_selected;
+    (* dont_touch = "true" *) wire[31:0] ME_reg_2_selected;
 	wire[31:0] ME_mem_res;
-
+	(* dont_touch = "true" *) wire ME_read_write;
+	(* dont_touch = "true" *) wire[1:0] ME_size_encoded;
 
 	// WB
 	wire WB_valid;
-	wire[31:0] WB_pc;
+	(* dont_touch = "true" *) wire[31:0] WB_pc;
 	wire[6:0] WB_opcode;
-	wire[4:0] WB_rd;
+	(* dont_touch = "true" *) wire[4:0] WB_rd;
 	wire[2:0] WB_funct3;
 	wire[31:0] WB_alu_res;
 	wire[31:0] WB_mem_res;
 
-	wire WB_wb_enable;
-	wire[31:0] WB_reg_d;
+	(* dont_touch = "true" *) wire WB_wb_enable;
+	(* dont_touch = "true" *) wire[31:0] WB_reg_d;
 
 	// Signals
 	assign ID_shamt[4:0] = ID_instruction[24:20];

@@ -1,4 +1,4 @@
-cpu.v  
+cpu.v
 fetch.v
 imemory.v
 IF_ID.v
@@ -14,4 +14,3 @@ memory.v
 dmemory.v
 ME_WB.v
 writeback.v
-

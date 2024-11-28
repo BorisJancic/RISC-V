@@ -16,12 +16,12 @@
 `define D_IMM               ID_imm
 `define D_SHAMT             ID_shamt
 //`define D_STALL				stall
-`define D_STALL_1           stall0.stall_1
-`define D_STALL_2           stall0.stall_2
-`define	D_F_R1_ME			forward_EX0.forward_reg_1_ME
-`define	D_F_R2_ME			forward_EX0.forward_reg_2_ME
-`define	D_F_R1_WB			forward_EX0.forward_reg_1_WB
-`define	D_F_R2_WB			forward_EX0.forward_reg_2_WB
+//`define D_STALL_1           stall0.stall_1
+//`define D_STALL_2           stall0.stall_2
+//`define	D_F_R1_ME			forward_EX0.forward_reg_1_ME
+//`define	D_F_R2_ME			forward_EX0.forward_reg_2_ME
+//`define	D_F_R1_WB			forward_EX0.forward_reg_1_WB
+//`define	D_F_R2_WB			forward_EX0.forward_reg_2_WB
 /*
 `define D_F_REG_2_ME		forward_reg_2_val_ME*/
 
@@ -36,9 +36,9 @@
 `define E_PC                EX_pc
 `define E_ALU_RES           EX_alu_res
 `define E_BR_TAKEN			branch
-`define E_OPCODE			EX_opcode
-/*`define E_REG_1				EX_reg_1
-`define E_REG_2				EX_reg_2*/
+// `define E_OPCODE			EX_opcode
+// `define E_REG_1				EX_reg_1
+// `define E_REG_2				EX_reg_2
 
 `define M_PC                ME_pc
 `define M_ADDRESS           ME_alu_res
@@ -51,8 +51,8 @@
 `define W_DESTINATION       WB_rd
 `define W_DATA              WB_reg_d
 
-`define IMEMORY             imemory0
-`define DMEMORY             dmemory0
+`define IMEMORY             fetch_0.imemory_0
+`define DMEMORY             memory_0.dmemory_0
 
 // ----- signals -----
 

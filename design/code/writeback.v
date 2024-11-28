@@ -13,7 +13,7 @@ module writeback (
 	input[31:0] mem_res,
 	input[31:0] alu_res,
 
-	output reg wb_enable,
+	output wb_enable,
 	output reg[31:0] reg_d
 );
 	// Writeback Enable

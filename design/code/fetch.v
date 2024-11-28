@@ -36,7 +36,7 @@ module fetch(
 		end
 	end
 
-	imemory imem_0(
+	imemory imemory_0(
 		.clock(clock),
 		.enable(!stall),
 		.read_write(read_write_imem),

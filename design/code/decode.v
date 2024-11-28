@@ -16,7 +16,7 @@ module decode(
 	output[4:0] rs1_out,
 	output[4:0] rs2_out,
 	output[4:0] rd_out,
-	output[31:0] imm
+	output reg[31:0] imm
 );
 	wire[6:0] funct7;
 	wire[4:0] shamt;
