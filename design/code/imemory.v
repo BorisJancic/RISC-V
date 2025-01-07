@@ -1,10 +1,10 @@
 module imemory(
-    input             clock,
-    input      [31:0] address,
-    input      [31:0] data_in,
-    input             read_write,
-    input             enable,
-    output reg [31:0] data_out
+        input             clock,
+        input      [31:0] address,
+        input      [31:0] data_in,
+        input             read_write,
+        input             enable,
+        output reg [31:0] data_out
 );
     wire       [31:0] address_2;
     wire       [31:0] ea;
@@ -28,5 +28,4 @@ module imemory(
             data_out <= mem[ea];
         end
     end
-
 endmodule
